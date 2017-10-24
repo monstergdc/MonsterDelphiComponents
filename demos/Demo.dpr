@@ -7,7 +7,8 @@ uses
   Forms,
   DemoMainUnit in 'DemoMainUnit.pas' {Form1},
   loglib in '..\src\loglib.pas',
-  wwwlabel in '..\src\wwwlabel.pas';
+  wwwlabel in '..\src\wwwlabel.pas',
+  gradimg in '..\src\gradimg.pas';
 
 {$R *.res}
 
