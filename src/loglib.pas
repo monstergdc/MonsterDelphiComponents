@@ -1,4 +1,4 @@
-﻿unit loglib;
+unit loglib;
 
 {----------------------------------------------------}
 { TLogger component for Delphi 3-7 or higher         }
@@ -29,7 +29,7 @@
 # v1.03
 - property CommaSep added
 # v1.04
-- Linux friendly
+- Lazarus/Linux friendly
 - loglevel added
 }
 
