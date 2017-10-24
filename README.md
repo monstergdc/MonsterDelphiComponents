@@ -8,3 +8,5 @@ for now:
 - TGradientImage - simple visual component that represents various types of gradient.
   It can also draw color map, paint [RBG|HSL]=f(x, y) functions,
   and render to external canvas.
+
+![demo screenshot](/demo.png?raw=true "demo screenshot")
