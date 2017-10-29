@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 188
   Top = 107
-  Width = 819
+  Width = 811
   Height = 462
   Caption = 'Demo of MoNsTeR'#39's Delphi components'
   Color = clBtnFace
@@ -67,7 +67,7 @@ object Form1: TForm1
   object GroupBox2: TGroupBox
     Left = 488
     Top = 8
-    Width = 153
+    Width = 145
     Height = 89
     Caption = 'TWWWLabel'
     TabOrder = 1
@@ -75,7 +75,7 @@ object Form1: TForm1
   object GroupBox3: TGroupBox
     Left = 8
     Top = 104
-    Width = 633
+    Width = 625
     Height = 329
     Caption = 'TGradientImage'
     TabOrder = 2
@@ -90,11 +90,19 @@ object Form1: TForm1
     end
   end
   object GroupBox4: TGroupBox
-    Left = 648
+    Left = 640
     Top = 8
     Width = 153
     Height = 89
     Caption = 'TArrow'
     TabOrder = 3
+  end
+  object GroupBox5: TGroupBox
+    Left = 640
+    Top = 104
+    Width = 153
+    Height = 169
+    Caption = 'TLissajoux'
+    TabOrder = 4
   end
 end

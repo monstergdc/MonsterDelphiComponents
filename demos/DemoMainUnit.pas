@@ -1,6 +1,6 @@
 unit DemoMainUnit;
 
-//MoNsTeR'd Delphi components - demo application
+//MoNsTeR'd Delphi components - Delphi 7 demo application
 //(c)2017 Noniewicz.com
 //created: 20171024
 //updated: 20171029
@@ -14,7 +14,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls,
-  wwwlabel, loglib, gradimg, arrow;
+  wwwlabel, loglib, gradimg, arrow, lissajoux;
 
 type
   TForm1 = class(TForm)
@@ -28,6 +28,7 @@ type
     MemoShowLog: TMemo;
     bnLoadLog: TButton;
     GroupBox4: TGroupBox;
+    GroupBox5: TGroupBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure bnLogClick(Sender: TObject);
@@ -43,6 +44,7 @@ type
     gi6: TGradientImage;
     arr1: TArrow;
     arr2: TArrow;
+    lis: TLissajoux;
   public
   end;
 
@@ -167,11 +169,23 @@ begin
   arr2.Angle := 15;
   arr2.ArrAngle := 20;
   arr2.ArrLength := 30;
-  arr2.LineWidth := 4;  
+  arr2.LineWidth := 4;
+
+  lis := TLissajoux.Create(GroupBox5);
+  lis.Parent := GroupBox5;
+  lis.Top := 20;
+  lis.Left := 10;
+  lis.Width := 128;
+  lis.Height := 128;
+  lis.LineColor := clWhite;
+  lis.BGColor := clBlack;
+  lis.Freq1 := 3;
+  lis.Freq2 := 4;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
+  lis.Free;
   arr2.Free;
   arr1.Free;
   gi6.Free;

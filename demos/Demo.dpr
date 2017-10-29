@@ -9,7 +9,8 @@ uses
   loglib in '..\src\loglib.pas',
   wwwlabel in '..\src\wwwlabel.pas',
   gradimg in '..\src\gradimg.pas',
-  arrow in '..\src\arrow.pas';
+  arrow in '..\src\arrow.pas',
+  lissajoux in '..\src\lissajoux.pas';
 
 {$R *.res}
 
