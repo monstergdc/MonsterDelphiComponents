@@ -3,6 +3,7 @@ unit DemoMainUnit;
 //MoNsTeR'd Delphi components - demo application
 //(c)2017 Noniewicz.com
 //created: 20171024
+//updated: 20171029
 
 //note that all components are created from code here,
 //in D7 one can put them directly on form,
@@ -12,8 +13,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls,
-  wwwlabel, loglib, gradimg, ExtCtrls;
+  Dialogs, StdCtrls, ExtCtrls,
+  wwwlabel, loglib, gradimg, arrow;
 
 type
   TForm1 = class(TForm)
@@ -26,6 +27,7 @@ type
     Image1: TImage;
     MemoShowLog: TMemo;
     bnLoadLog: TButton;
+    GroupBox4: TGroupBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure bnLogClick(Sender: TObject);
@@ -39,6 +41,8 @@ type
     gi4: TGradientImage;
     gi5: TGradientImage;
     gi6: TGradientImage;
+    arr1: TArrow;
+    arr2: TArrow;
   public
   end;
 
@@ -148,10 +152,28 @@ begin
   Image1.Picture.Bitmap.Width := Image1.Width;
   Image1.Picture.Bitmap.Height := Image1.Height;
   gi6.PaintRGBFunction(Image1.Picture.Bitmap.Canvas, Image1.Width, Image1.Height, 0, 0);
+
+  arr1 := TArrow.Create(GroupBox4);
+  arr1.Parent := GroupBox4;
+  arr1.Left := 10;
+  arr1.Top := 24;
+  arr1.LineWidth := 2;
+
+  arr2 := TArrow.Create(GroupBox4);
+  arr2.Parent := GroupBox4;
+  arr2.Left := 10 + 50;
+  arr2.Top := 24;
+  arr2.ArrowColor := clBlue;
+  arr2.Angle := 15;
+  arr2.ArrAngle := 20;
+  arr2.ArrLength := 30;
+  arr2.LineWidth := 4;  
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
+  arr2.Free;
+  arr1.Free;
   gi6.Free;
   gi5.Free;
   gi4.Free;

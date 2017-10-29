@@ -8,7 +8,8 @@ uses
   DemoMainUnit in 'DemoMainUnit.pas' {Form1},
   loglib in '..\src\loglib.pas',
   wwwlabel in '..\src\wwwlabel.pas',
-  gradimg in '..\src\gradimg.pas';
+  gradimg in '..\src\gradimg.pas',
+  arrow in '..\src\arrow.pas';
 
 {$R *.res}
 
