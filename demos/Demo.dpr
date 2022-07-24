@@ -1,7 +1,7 @@
 program Demo;
 
 //MoNsTeR's Delphi components - demo
-//(c)2017 Noniewicz.com
+//(c)2017-2022 Noniewicz.com
 
 uses
   Forms,
@@ -9,8 +9,8 @@ uses
   loglib in '..\src\loglib.pas',
   wwwlabel in '..\src\wwwlabel.pas',
   gradimg in '..\src\gradimg.pas',
-  arrow in '..\src\arrow.pas',
-  lissajoux in '..\src\lissajoux.pas';
+  lissajoux in '..\src\lissajoux.pas',
+  tarrow in '..\src\tarrow.pas';
 
 {$R *.res}
 

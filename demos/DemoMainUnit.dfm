@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 188
   Top = 107
   Width = 811
-  Height = 462
+  Height = 468
   Caption = 'Demo of MoNsTeR'#39's Delphi components'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -94,7 +94,7 @@ object Form1: TForm1
     Top = 8
     Width = 153
     Height = 89
-    Caption = 'TArrow'
+    Caption = 'TArrowImg'
     TabOrder = 3
   end
   object GroupBox5: TGroupBox

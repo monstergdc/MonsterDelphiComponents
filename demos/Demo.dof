@@ -126,13 +126,13 @@ CodePage=1250
 [Version Info Keys]
 CompanyName=Noniewicz.com
 FileDescription=
-FileVersion=1.0.0.1
+FileVersion=1.0.0.2
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=
-ProductVersion=1.0.0.0
+ProductVersion=1.0.0.2
 Comments=
 [Excluded Packages]
 c:\program files (x86)\borland\delphi7\Bin\dclindy70.bpl=Internet Direct (Indy) for D7 Property and Component Editors
