@@ -6,11 +6,12 @@ program Demo;
 uses
   Forms,
   DemoMainUnit in 'DemoMainUnit.pas' {Form1},
-  loglib in '..\src\loglib.pas',
-  wwwlabel in '..\src\wwwlabel.pas',
-  gradimg in '..\src\gradimg.pas',
-  lissajoux in '..\src\lissajoux.pas',
-  tarrow in '..\src\tarrow.pas';
+  loglib in '..\..\src\loglib.pas',
+  wwwlabel in '..\..\src\wwwlabel.pas',
+  gradimg in '..\..\src\gradimg.pas',
+  lissajoux in '..\..\src\lissajoux.pas',
+  tarrow in '..\..\src\tarrow.pas',
+  clbitbtn in '..\..\src\clbitbtn.pas';
 
 {$R *.res}
 

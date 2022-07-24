@@ -15,7 +15,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls,
-  wwwlabel, loglib, gradimg, tarrow, lissajoux;
+  wwwlabel, loglib, gradimg, tarrow, lissajoux, clbitbtn;
 
 type
   TForm1 = class(TForm)
@@ -30,6 +30,7 @@ type
     bnLoadLog: TButton;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
+    GroupBox6: TGroupBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure bnLogClick(Sender: TObject);
@@ -46,6 +47,7 @@ type
     arr1: TArrowImg;
     arr2: TArrowImg;
     lis: TLissajoux;
+    cbn: TColorBitBtn;
   public
   end;
 
@@ -182,10 +184,20 @@ begin
   lis.BGColor := clBlack;
   lis.Freq1 := 3;
   lis.Freq2 := 4;
+
+  cbn := TColorBitBtn.Create(GroupBox6);
+  cbn.Parent := GroupBox6;
+  cbn.Caption := 'test';
+  cbn.GlyphColor := clRed;
+  //GlyphWidth
+  //GlyphHeight
+  cbn.Left := 16;
+  cbn.Top := 16;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
+  cbn.Free;
   lis.Free;
   arr2.Free;
   arr1.Free;

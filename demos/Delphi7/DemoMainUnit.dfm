@@ -105,4 +105,12 @@ object Form1: TForm1
     Caption = 'TLissajoux'
     TabOrder = 4
   end
+  object GroupBox6: TGroupBox
+    Left = 640
+    Top = 280
+    Width = 153
+    Height = 89
+    Caption = 'TColorBitBtn'
+    TabOrder = 5
+  end
 end
