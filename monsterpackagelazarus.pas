@@ -8,7 +8,7 @@ unit MonsterPackageLazarus;
 interface
 
 uses
-  gradimg, wwwlabel, loglib, arrow, lissajoux, LazarusPackageIntf;
+  gradimg, wwwlabel, loglib, lissajoux, LazarusPackageIntf;
 
 implementation
 
@@ -17,6 +17,7 @@ begin
   RegisterUnit('gradimg', @gradimg.Register);
   RegisterUnit('wwwlabel', @wwwlabel.Register);
   RegisterUnit('loglib', @loglib.Register);
+  RegisterUnit('lissajoux', @lissajoux.Register);
 end;
 
 initialization

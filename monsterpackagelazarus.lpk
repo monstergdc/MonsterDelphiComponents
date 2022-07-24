@@ -41,6 +41,7 @@
       </Item4>
       <Item5>
         <Filename Value="src\lissajoux.pas"/>
+        <HasRegisterProc Value="True"/>
         <UnitName Value="lissajoux"/>
       </Item5>
     </Files>
