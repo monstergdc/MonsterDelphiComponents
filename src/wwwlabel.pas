@@ -1,5 +1,7 @@
 unit wwwlabel;
 
+{$MODE Delphi}
+
 {----------------------------------------------------}
 { TWWWLabel component for Delphi 3-7 or higher       }
 { Version 1.3                                        }
