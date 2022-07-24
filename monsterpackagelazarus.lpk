@@ -19,7 +19,7 @@
       </Linking>
     </CompilerOptions>
     <Version Major="1"/>
-    <Files Count="7">
+    <Files Count="8">
       <Item1>
         <Filename Value="src\gradimg.pas"/>
         <HasRegisterProc Value="True"/>
@@ -54,6 +54,11 @@
         <HasRegisterProc Value="True"/>
         <UnitName Value="tarrow"/>
       </Item7>
+      <Item8>
+        <Filename Value="src\clbitbtn.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="clbitbtn"/>
+      </Item8>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>
