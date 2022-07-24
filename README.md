@@ -8,8 +8,9 @@ for now:
 - TGradientImage - simple visual component that represents various types of gradient.
   It can also draw color map, paint [RBG|HSL]=f(x, y) functions,
   and render to external canvas.
-- TArrow component - simple visual component that represents an arrow.
+- TArrowImg (former TArrow) component - simple visual component that represents an arrow.
   Parameters include: length, angle, color, line width also len and angle of the 'pointy' part.
 - TLissajoux component - simple visual component for rendering Lissajoux curves.
+- TRecent component - simple recent files submenu
 
 ![demo screenshot](/demo.png?raw=true "demo screenshot")

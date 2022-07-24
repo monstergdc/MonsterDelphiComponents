@@ -1,9 +1,11 @@
 unit tarrow;
 
-{$mode Delphi}
+{$ifdef FPC}
+  {$MODE Delphi}
+{$endif}
 
 {---------------------------------------------}
-{ TArrow Delphi component (D3|D7|BDS2k6)      }
+{ TArrowImg Delphi component (D3|D7|BDS2k6)   }
 { Version 1.02                                }
 { Created: 2003.11.11                         }
 { E-mail:  monster@Noniewicz.com              }
@@ -13,7 +15,7 @@ unit tarrow;
 { Licence: BSD 2-Clause License               }
 {---------------------------------------------}
 { Description:                                }
-{ The TArrow component is simple visual       }
+{ The TArrowImg component is simple visual    }
 { component that represents an arrow.         }
 { Parameters include:                         }
 { length, angle, color, line width            }
@@ -23,7 +25,7 @@ unit tarrow;
 { Version 1.00, update: 2003.11.11            }
 { Version 1.01, update: 2005.07.24            }
 { Version 1.02, update: 2017.10.29 GitHub     }
-{ updated: 2020724                            }
+{ updated: 2020724 TArrow -> TArrowImg        }
 {---------------------------------------------}
 
 {todo:
@@ -43,7 +45,7 @@ interface
 uses Windows, Classes, Graphics, Controls, SysUtils;
 
 type
-  TArrow = class(TGraphicControl)
+  TArrowImg = class(TGraphicControl)
   private
     FStartPoint: TPoint;
     FEndPoint: TPoint;
@@ -126,18 +128,18 @@ implementation
 
 procedure Register;
 begin
-  RegisterComponents('Monster', [TArrow]);
+  RegisterComponents('Monster', [TArrowImg]);
 end;
 
 //------------------------------
 
-procedure TArrow.A2C;
+procedure TArrowImg.A2C;
 begin
   FEndPoint.x := FStartPoint.x + round(Flength*cos(FAngle/180*pi));
   FEndPoint.y := FStartPoint.y + round(Flength*sin(FAngle/180*pi));
 end; { A2C }
 
-procedure TArrow.C2A;
+procedure TArrowImg.C2A;
 var dx, dy: Integer;
 begin
   dx := FEndPoint.x-FStartPoint.x;
@@ -149,12 +151,12 @@ begin
   FLength := Round(sqrt( sqr(dy) + sqr(dx) ));
 end; { C2A }
 
-procedure TArrow.Paint;
+procedure TArrowImg.Paint;
 begin
   PaintToCanvas(self.Canvas);
 end; { Paint }
 
-procedure TArrow.PaintToCanvas(Canvas: TCanvas);
+procedure TArrowImg.PaintToCanvas(Canvas: TCanvas);
 var x, y: Integer;
 begin
   Canvas.Brush.Color := color;
@@ -174,7 +176,7 @@ begin
   Canvas.LineTo(x, y);
 end; { PaintToCanvas }
 
-constructor TArrow.Create(AOwner: TComponent);
+constructor TArrowImg.Create(AOwner: TComponent);
 begin
   inherited;
   Width := 100;
@@ -192,12 +194,12 @@ begin
   C2A;
 end; { Create }
 
-destructor TArrow.Destroy;
+destructor TArrowImg.Destroy;
 begin
   inherited;
 end; { Destroy }
 
-procedure TArrow.CWriteFAngle(PAngle: single);
+procedure TArrowImg.CWriteFAngle(PAngle: single);
 begin
   if FAngle <> PAngle then
   begin
@@ -207,7 +209,7 @@ begin
   end;
 end; { CWriteFAngle }
 
-procedure TArrow.CWriteFArrowColor(PArrowColor: TColor);
+procedure TArrowImg.CWriteFArrowColor(PArrowColor: TColor);
 begin
   if FArrowColor <> PArrowColor then
   begin
@@ -216,7 +218,7 @@ begin
   end;
 end; { CWriteFArrowColor }
 
-procedure TArrow.CWriteFLength(PLength: Integer);
+procedure TArrowImg.CWriteFLength(PLength: Integer);
 begin
   if FLength <> PLength then
   begin
@@ -226,7 +228,7 @@ begin
   end;
 end; { CWriteFLength }
 
-procedure TArrow.CWriteFStartPointX(PStartPointX: Integer);
+procedure TArrowImg.CWriteFStartPointX(PStartPointX: Integer);
 begin
   if FStartPoint.x <> PStartPointX then
   begin
@@ -236,7 +238,7 @@ begin
   end;
 end; { CWriteFStartPointX }
 
-procedure TArrow.CWriteFStartPointY(PStartPointY: Integer);
+procedure TArrowImg.CWriteFStartPointY(PStartPointY: Integer);
 begin
   if FStartPoint.y <> PStartPointY then
   begin
@@ -246,7 +248,7 @@ begin
   end;
 end; { CWriteFStartPointY }
 
-procedure TArrow.CWriteFEndPointX(PEndPointX: Integer);
+procedure TArrowImg.CWriteFEndPointX(PEndPointX: Integer);
 begin
   if FEndPoint.x <> PEndPointX then
   begin
@@ -256,7 +258,7 @@ begin
   end;
 end; { CWriteFEndPointX }
 
-procedure TArrow.CWriteFEndPointY(PEndPointY: Integer);
+procedure TArrowImg.CWriteFEndPointY(PEndPointY: Integer);
 begin
   if FEndPoint.y <> PEndPointY then
   begin
@@ -266,7 +268,7 @@ begin
   end;
 end; { CWriteFEndPointY }
 
-procedure TArrow.CWriteFTransparent(PTransparent: boolean);
+procedure TArrowImg.CWriteFTransparent(PTransparent: boolean);
 begin
   if FTransparent <> PTransparent then
   begin
@@ -275,7 +277,7 @@ begin
   end;
 end; { CWriteFTransparent }
 
-procedure TArrow.CWriteFArrLength(PArrLength: Integer);
+procedure TArrowImg.CWriteFArrLength(PArrLength: Integer);
 begin
   if FArrLength <> PArrLength then
   begin
@@ -284,7 +286,7 @@ begin
   end;
 end; { CWriteFArrLength }
 
-procedure TArrow.CWriteFLineWidth(PLineWidth: Integer);
+procedure TArrowImg.CWriteFLineWidth(PLineWidth: Integer);
 begin
   if FLineWidth <> PLineWidth then
   begin
@@ -293,7 +295,7 @@ begin
   end;
 end; { CWriteFLineWidth }
 
-procedure TArrow.CWriteFArrAngle(PArrAngle: single);
+procedure TArrowImg.CWriteFArrAngle(PArrAngle: single);
 begin
   if FArrAngle <> PArrAngle then
   begin

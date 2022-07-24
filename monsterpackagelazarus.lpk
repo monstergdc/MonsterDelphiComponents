@@ -19,7 +19,7 @@
       </Linking>
     </CompilerOptions>
     <Version Major="1"/>
-    <Files Count="5">
+    <Files Count="7">
       <Item1>
         <Filename Value="src\gradimg.pas"/>
         <HasRegisterProc Value="True"/>
@@ -44,6 +44,16 @@
         <HasRegisterProc Value="True"/>
         <UnitName Value="lissajoux"/>
       </Item5>
+      <Item6>
+        <Filename Value="src\recent.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="recent"/>
+      </Item6>
+      <Item7>
+        <Filename Value="src\tarrow.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="tarrow"/>
+      </Item7>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>
