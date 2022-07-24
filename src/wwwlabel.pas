@@ -21,6 +21,7 @@ unit wwwlabel;
 { Version 1.2, update: 2006.05.17                    }
 { Version 1.3, update: 2006.05.18                    }
 { Version 1.4, update: 2017.10.24 GitHub             }
+{ update: 20220724                                   }
 {----------------------------------------------------}
 
 {CHANGELOG:
@@ -99,6 +100,8 @@ procedure Register;
 
 
 implementation
+
+uses LResources;
 
 
 
@@ -210,4 +213,9 @@ begin
   inherited;
 end; { Destroy }
 
+initialization
+
+{$I monsterpackagelazarus_icons.lrs}
+
 end.
+

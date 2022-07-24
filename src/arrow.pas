@@ -1,5 +1,7 @@
 unit arrow;
 
+{$mode Delphi}
+
 {---------------------------------------------}
 { TArrow Delphi component (D3|D7|BDS2k6)      }
 { Version 1.02                                }
@@ -21,6 +23,7 @@ unit arrow;
 { Version 1.00, update: 2003.11.11            }
 { Version 1.01, update: 2005.07.24            }
 { Version 1.02, update: 2017.10.29 GitHub     }
+{ updated: 2020724                            }
 {---------------------------------------------}
 
 {todo:
