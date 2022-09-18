@@ -1,6 +1,6 @@
 # MonsterDelphiComponents
 Miscellaneous Delphi/Lazarus components by Jakub Noniewicz aka MoNsTeR/GDC.
-I'v used them for years in Delphi 3, Delphi 7, BDS 2016 and now in Lazarus.
+I've used them for years in Delphi 3, Delphi 7, BDS 2016 and now in Lazarus.
 
 for now:
 - **TLogger** component - intended for simple events (or whatever) logging to plain text file.
