@@ -2,6 +2,9 @@
 Miscellaneous Delphi/Lazarus components by Jakub Noniewicz aka MoNsTeR/GDC.
 I've used them for years in Delphi 3, Delphi 7, BDS 2016 and now in Lazarus.
 
+
+![ide](/ide.png?raw=true "IDE")
+
 for now:
 - **TLogger** component - intended for simple events (or whatever) logging to plain text file.
 - **TWWWLabel** component - simple clickable label that opens default web browser with given URL.
