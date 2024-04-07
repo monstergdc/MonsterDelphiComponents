@@ -2,6 +2,10 @@
 Miscellaneous Delphi/Lazarus components by Jakub Noniewicz aka MoNsTeR/GDC.
 I've used them for years in Delphi 3, Delphi 7, BDS 2016 and now in Lazarus.
 
+NOTES:
+- they may not be *YET* crossplatform (but should work on Windows),
+- they were never tested wi Delphi > BDS 2016,
+- thay may no longer work with Delphi since I only care for Lazarus now
 
 ![ide](/ide.png?raw=true "IDE")
 
