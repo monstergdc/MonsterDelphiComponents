@@ -8,8 +8,8 @@ unit MonsterPackageLazarus;
 interface
 
 uses
-  gradimg, wwwlabel, loglib, lissajoux, recent, tarrow, clbitbtn, 
-  LazarusPackageIntf;
+  gradimg, wwwlabel, loglib, lissajoux, recent, tarrow, clbitbtn, lazkeymap, 
+  Charmap, LazarusPackageIntf;
 
 implementation
 
@@ -22,6 +22,8 @@ begin
   RegisterUnit('recent', @recent.Register);
   RegisterUnit('tarrow', @tarrow.Register);
   RegisterUnit('clbitbtn', @clbitbtn.Register);
+  RegisterUnit('lazkeymap', @lazkeymap.Register);
+  RegisterUnit('Charmap', @Charmap.Register);
 end;
 
 initialization

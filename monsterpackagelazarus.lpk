@@ -19,7 +19,7 @@
       </Linking>
     </CompilerOptions>
     <Version Major="1"/>
-    <Files Count="8">
+    <Files Count="10">
       <Item1>
         <Filename Value="src\gradimg.pas"/>
         <HasRegisterProc Value="True"/>
@@ -59,6 +59,16 @@
         <HasRegisterProc Value="True"/>
         <UnitName Value="clbitbtn"/>
       </Item8>
+      <Item9>
+        <Filename Value="src\lazkeymap.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="lazkeymap"/>
+      </Item9>
+      <Item10>
+        <Filename Value="src\Charmap.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="CharMap"/>
+      </Item10>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>

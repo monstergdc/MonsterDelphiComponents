@@ -17,4 +17,8 @@ for now:
 - **TRecent** component - simple recent files submenu.
 - **TColorBitBtn** component - TBitBtn descendant with single-colored glyph.
 
+also some more:
+- **TCharMap** component.
+- **TShortCutEdit** component.
+
 ![demo screenshot](/demo.png?raw=true "demo screenshot")
