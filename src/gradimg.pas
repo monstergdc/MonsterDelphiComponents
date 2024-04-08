@@ -30,6 +30,7 @@ unit gradimg;
 { Version 1.08, update: 2012.02.17-18, 25         }
 { Version 1.08, update: 2014.07.02                }
 { Version 1.09, update: 2017.10.24 GitHub         }
+{ Version 1.09a, update: 2024.04.08               }
 {-------------------------------------------------}
 
 {todo:
@@ -74,7 +75,7 @@ v1.09:
 
 interface
 
-uses Windows, Classes, Graphics, Forms, Controls, extctrls,
+uses (*Windows,*) LCLIntf, Classes, Graphics, Forms, Controls, extctrls,
      messages, dialogs;
 
 type
