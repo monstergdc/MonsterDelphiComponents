@@ -46,10 +46,11 @@ interface
 
 uses
      {$ifdef windows}
-     Windows, Registry,
+     Windows,
      {$endif}
+     Registry,
      Classes, Graphics, Forms, Controls, StdCtrls, SysUtils;
-     //dialogs
+
 
 type
   TWWWLabel = class(TCustomLabel)
