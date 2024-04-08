@@ -4,8 +4,8 @@ I've used them for years in Delphi 3, Delphi 7, BDS 2016 and now in Lazarus.
 
 NOTES:
 - they may not be *YET* crossplatform (but should work on Windows),
-- they were never tested wi Delphi > BDS 2016,
-- thay may no longer work with Delphi since I only care for Lazarus now
+- they were never tested with Delphi > BDS 2016,
+- they may no longer work with Delphi since I only care for Lazarus now
 
 ![ide](/ide.png?raw=true "IDE")
 
@@ -22,7 +22,7 @@ for now:
 - **TColorBitBtn** component - TBitBtn descendant with single-colored glyph.
 
 also some more:
-- **TCharMap** component.
+- **TCharMap** component - TCustomGrid descendant showich character map.
 - **TShortCutEdit** component.
 
 ![demo screenshot](/demo.png?raw=true "demo screenshot")

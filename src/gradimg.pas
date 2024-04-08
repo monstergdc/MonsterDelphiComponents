@@ -1,12 +1,13 @@
 unit gradimg;
 
 {-------------------------------------------------}
-{ TGradientImage Delphi component (D3|D7|BDS2k6)  }
-{ Version 1.08                                    }
+{ TGradientImage Delphi/Lazarus component         }
+{ (D3|D7|BDS2k6)                                  }
+{ Version 1.10                                    }
 { Created: 2003.12.10                             }
-{ E-mail:  monster@Noniewicz.com                  }
-{ WWW:     http://www.Noniewicz.com               }
-{ Legal:   (c)2003-2017 Noniewicz.com,            }
+{ E-mail:  jnoniewicz@gmail.com                   }
+{ WWW:     https://www.Noniewicz.com              }
+{ Legal:   (c)2003-2024 Noniewicz.com,            }
 { Jakub Noniewicz aka MoNsTeR/GDC                 }
 { Licence: BSD 2-Clause License                   }
 {-------------------------------------------------}
@@ -30,7 +31,7 @@ unit gradimg;
 { Version 1.08, update: 2012.02.17-18, 25         }
 { Version 1.08, update: 2014.07.02                }
 { Version 1.09, update: 2017.10.24 GitHub         }
-{ Version 1.09a, update: 2024.04.08               }
+{ Version 1.10, update: 2024.04.08 Lazarus        }
 {-------------------------------------------------}
 
 {todo:
@@ -71,11 +72,23 @@ v1.08:
 - PaintHSLFunction2
 v1.09:
 - minor fixes, code sync and cleanup
+v1.10:
+- (more) crossplaform
 }
+
+{$ifdef FPC}
+  {$MODE Delphi}
+{$endif}
 
 interface
 
-uses (*Windows,*) LCLIntf, Classes, Graphics, Forms, Controls, extctrls,
+uses
+     {$ifndef FPC}
+     Windows,
+     {$else}
+     LCLIntf,
+     {$endif}
+     Classes, Graphics, Forms, Controls, extctrls,
      messages, dialogs;
 
 type

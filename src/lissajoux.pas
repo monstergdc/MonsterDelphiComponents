@@ -2,11 +2,11 @@ unit lissajoux;
 
 {-------------------------------------------------}
 { TLissajoux Delphi component (D3|D7|BDS2k6)      }
-{ Version: 1.3                                    }
+{ Version: 1.31                                   }
 { Created: 2004.11.20                             }
 { E-mail:  monster@Noniewicz.com                  }
 { WWW:     http://www.Noniewicz.com               }
-{ Legal:   (c)1992-2012, 2017 Noniewicz.com,      }
+{ Legal:   (c)1992-2012, 2017, 2024 Noniewicz.com,}
 { Jakub Noniewicz aka MoNsTeR/GDC                 }
 { Licence: BSD 2-Clause License                   }
 {-------------------------------------------------}
@@ -15,10 +15,11 @@ unit lissajoux;
 { component that rendering Lissajoux curves.      }
 {-------------------------------------------------}
 { History:                                        }
-{ Version 1.0, update: 2004.11.20                 }
-{ Version 1.1, update: 2005.11.20                 }
-{ Version 1.2, update: 2012.09.15                 }
-{ Version 1.3, update: 2017.10.29 GitHub          }
+{ Version 1.00, update: 2004.11.20                }
+{ Version 1.10, update: 2005.11.20                }
+{ Version 1.20, update: 2012.09.15                }
+{ Version 1.30, update: 2017.10.29 GitHub         }
+{ Version 1.31, update: 2024.04.08                }
 {-------------------------------------------------}
 
 {todo:
@@ -26,19 +27,31 @@ unit lissajoux;
 }
 
 {CHANGELOG:
-v1.1:
+v1.10:
 - paint to external canvas
 - dotmode/linemode
 - line width
-v1.2:
+v1.20:
 - minor changes
-v1.3:
+v1.30:
 - code cleanup
+v1.31:
+- crossplatform
 }
+
+{$ifdef FPC}
+  {$MODE Delphi}
+{$endif}
 
 interface
 
-uses Windows, Classes, Graphics, Controls, Extctrls, Messages, SysUtils;
+uses
+     {$ifndef FPC}
+     Windows,
+     {$else}
+     LCLIntf,
+     {$endif}
+     Classes, Graphics, Controls, Extctrls, Messages, SysUtils;
 
 type
   TLissajoux = class(TCustomControl)
@@ -118,7 +131,7 @@ begin
   FFi := 0;
   Fdt := 1;
   FSteps := 10000;
-  FLineColor := RGB(0, 0, 0);
+  FLineColor := clBlack;
   FBGColor := clWhite;
   FDotmode := false;
   FWidth := 1; 

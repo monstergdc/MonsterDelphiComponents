@@ -1,19 +1,32 @@
 unit clbitbtn;
 
 {---------------------------------------------------}
-{ TColorBitBtn component                            }
-{ Version 1.00                                      }
-{ Legal:   (c)2003-2005, 2022 Noniewicz.com,        }
+{ TColorBitBtn Delphi/Lazarus component             }
+{ Version 1.01                                      }
+{ Legal:   (c)2003-2005, 2022, 2024 Noniewicz.com,  }
 { Jakub Noniewicz aka MoNsTeR/GDC                   }
-{ E-mail:  monster@Noniewicz.com                    }
-{ WWW:     http://www.Noniewicz.com                 }
-{ Version 1.0, update: 2005.11.12                   }
+{ E-mail:  jnoniewicz@gmail.com                     }
+{ WWW:     https://www.Noniewicz.com                }
+{ Licence: BSD 2-Clause License                     }
+{---------------------------------------------------}
+{ History:                                          }
+{ Version 1.00, update: 2005.11.12                  }
+{ Version 1.01, update: 2024.04.08                  }
 {---------------------------------------------------}
 
+{$ifdef FPC}
+  {$MODE Delphi}
+{$endif}
 
 interface
 
-uses Windows, Classes, Graphics, Buttons, Controls, SysUtils;
+uses
+     {$ifndef FPC}
+     Windows,
+     {$else}
+     LCLIntf,
+     {$endif}
+     Classes, Graphics, Buttons, Controls, SysUtils;
 
 type
   TColorBitBtn = class(TBitBtn)

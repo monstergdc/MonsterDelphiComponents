@@ -1,16 +1,13 @@
 unit tarrow;
 
-{$ifdef FPC}
-  {$MODE Delphi}
-{$endif}
-
 {---------------------------------------------}
-{ TArrowImg Delphi component (D3|D7|BDS2k6)   }
-{ Version 1.02                                }
+{ TArrowImg Delphi/Lazarus component          }
+{ (D3|D7|BDS2k6)                              }
+{ Version 1.03                                }
 { Created: 2003.11.11                         }
-{ E-mail:  monster@Noniewicz.com              }
-{ WWW:     http://www.Noniewicz.com           }
-{ Legal:   (c)2003-2017 Noniewicz.com,        }
+{ E-mail:  jnoniewicz@gmail.com               }
+{ WWW:     https://www.Noniewicz.com          }
+{ Legal:   (c)2003-2017, 2024 Noniewicz.com,  }
 { Jakub Noniewicz aka MoNsTeR/GDC             }
 { Licence: BSD 2-Clause License               }
 {---------------------------------------------}
@@ -25,7 +22,8 @@ unit tarrow;
 { Version 1.00, update: 2003.11.11            }
 { Version 1.01, update: 2005.07.24            }
 { Version 1.02, update: 2017.10.29 GitHub     }
-{ updated: 2020724 TArrow -> TArrowImg        }
+{ updated: 2020.07.24 TArrow -> TArrowImg     }
+{ Version 1.03, update: 2024.04.08            }
 {---------------------------------------------}
 
 {todo:
@@ -38,11 +36,23 @@ v1.00-1.01:
 - all base stuff
 v1.02:
 - minor code cleanup
+v1.03:
+- Lazarus/crossplatform
 }
+
+{$ifdef FPC}
+  {$MODE Delphi}
+{$endif}
 
 interface
 
-uses Windows, Classes, Graphics, Controls, SysUtils;
+uses
+    {$ifndef FPC}
+    Windows,
+    {$else}
+    LCLIntf,
+    {$endif}
+    Classes, Graphics, Controls, SysUtils;
 
 type
   TArrowImg = class(TGraphicControl)
@@ -123,7 +133,7 @@ procedure Register;
 
 implementation
 
-{$R *.DCR}
+{.$R *.dcr}
 
 
 procedure Register;

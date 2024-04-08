@@ -1,14 +1,17 @@
 unit recent;
 
 {----------------------------------------------}
-{ TRecent component                            }
-{ (c)2005, 2008 MoNsTeR/GDC, Jakub Noniewicz   }
+{ TRecent Delphi/Lazarus component             }
+{ (c)2005, 2008, 2022, 2024 MoNsTeR/GDC, Jakub Noniewicz }
 { monster@noniewicz.com                        }
-{ Version 1.0, update: 2005.06.15              }
+{----------------------------------------------}
+{ History:                                     }
+{ Version 1.00, update: 2005.06.15             }
 { Version 1.0a, update: 2008.08.03             }
 { Version 1.01, update: 2008.08.05             }
 { Version 1.02, update: 2008.08.07             }
-{ Version 1.02, update: 2022.07.24 GitHub      }
+{ Version 1.03, update: 2022.07.24 GitHub      }
+{ Version 1.04, update: 2024.04.08             }
 {----------------------------------------------}
 
 {todo:
@@ -19,22 +22,30 @@ unit recent;
 {
 history:
 v1.01:
-- FIXED: there is some crash bug???!!! [when menu assigned in design time]
+- FIXED: there is some crash bug! [when menu assigned in design time]
 v1.02:
 - more fixes...
+v1.03:
+- ?
+v1.04:
+- code cleanup, crosscompilable
 }
+
+{$ifdef FPC}
+  {$MODE Delphi}
+{$endif}
 
 interface
 
-uses Windows, Classes, Forms, Controls, Menus, {Messages,}
-  StdCtrls, ExtCtrls, ComCtrls, ToolWin, {Registry,} 
-  SysUtils,
+uses
+  //Windows,
+  Classes, Forms, Controls, Menus,
+  SysUtils, StdCtrls, ExtCtrls, ComCtrls,
   iniFiles;
 
 type
   TRecent = class(TComponent)
   private
-    { Private declarations }
     FFiles: TStringList;
     FMenu: TMenuItem;
     FMaxFiles: integer;
@@ -49,7 +60,6 @@ type
     procedure CWriteFMaxLen(PMaxLen: integer);
     function FormatTitle(title: string): string;
   public
-    { Public declarations }
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure InsertLastFile(filename: string);
@@ -57,7 +67,6 @@ type
     procedure Refresh;
     function GetFileNameByMenuItemTag(i: integer): string;
   published
-    { Published declarations }
     property Menu: TMenuItem read FMenu write CWriteFMenu;
     property MaxFiles: integer read FMaxFiles write CWriteFMaxFiles;
     property MaxLen: integer read FMaxLen write CWriteFMaxLen;
@@ -102,7 +111,7 @@ procedure TRecent.Clear;
 begin
   FFiles.Clear;
   self.Refresh;
-end; { Clear }
+end;
 
 //---
 
@@ -110,7 +119,7 @@ procedure TRecent.CWriteFMenu(PMenu: TMenuItem);
 begin
   FMenu := PMenu;
   self.Refresh;  
-end; {}
+end;
 
 procedure TRecent.CWriteFMaxFiles(PMaxFiles: integer);
 begin
@@ -119,11 +128,11 @@ begin
   else
     FMaxFiles := 1;
   self.Refresh;
-end; {}
+end;
 
 procedure TRecent.CWriteFMaxLen(PMaxLen: integer);
 begin
-  if PMaxLen > 7 then        //like at least 'c:\' + '.txt'
+  if PMaxLen > 7 then //like at least 'c:\' + '.txt'
     FMaxLen := PMaxLen
   else
     FMaxLen := 7;
@@ -134,18 +143,18 @@ procedure TRecent.CWriteFNoneCaption(PNoneCaption: string);
 begin
   FNoneCaption := PNoneCaption;
   self.Refresh;
-end; {}
+end;
 
 function TRecent.CReadFFilesText: string;
 begin
   Result := FFiles.Text;
-end; {}
+end;
 
 procedure TRecent.CWriteFFilesText(PFilesText: string);
 begin
   FFiles.Text := PFilesText;
   self.Refresh;
-end; {}
+end;
 
 //---
 
@@ -154,7 +163,9 @@ var sd, sf, sp, spok: string;
     i: integer;
 begin
   if (length(title) <= FMaxLen) then
-    Result := title
+  begin
+    result := title
+  end
   else
   begin
     sd := ExtractFileDrive(title);
@@ -165,7 +176,7 @@ begin
     while (length(spok) > 0) and (spok[length(spok)] <> '\') do
       delete(spok, length(spok), 1);
 
-    Result := sd + spok + '...\' + sf;
+    result := sd + spok + '...\' + sf;
   end;
 end; { FormatTitle }
 
@@ -241,7 +252,6 @@ begin
 
   self.Refresh;
 end; { InsertLastFile }
-
 
 function TRecent.GetFileNameByMenuItemTag(i: integer): string;
 begin

@@ -1,16 +1,12 @@
 unit wwwlabel;
 
-{$ifdef FPC}
-  {$MODE Delphi}
-{$endif}
-
 {----------------------------------------------------}
 { TWWWLabel component for Delphi 3-7 or higher       }
-{ Version 1.3                                        }
+{ Version 1.42                                       }
 { Created: 2003.08.23                                }
-{ E-mail:  monster@Noniewicz.com                     }
-{ WWW:     http://www.Noniewicz.com                  }
-{ Legal:   (c)2003-2017 MoNsTeR/GDC, Jakub Noniewicz }
+{ E-mail:  jnoniewicz@gmail.com                      }
+{ WWW:     https://www.Noniewicz.com                 }
+{ Legal:   (c)2003-2017, 2022, 2024 MoNsTeR/GDC, Jakub Noniewicz }
 { Licence: BSD 2-Clause License                      }
 {----------------------------------------------------}
 { Description:                                       }
@@ -18,30 +14,42 @@ unit wwwlabel;
 { that opens default web browser with given URL      }
 {----------------------------------------------------}
 { History:                                           }
-{ Version 1.0, update: 2003.08.23                    }
-{ Version 1.1, update: 2004.01.30                    }
-{ Version 1.2, update: 2006.05.17                    }
-{ Version 1.3, update: 2006.05.18                    }
-{ Version 1.4, update: 2017.10.24 GitHub             }
-{ update: 20220724 Lazarus                                  }
+{ Version 1.00, update: 2003.08.23                   }
+{ Version 1.10, update: 2004.01.30                   }
+{ Version 1.20, update: 2006.05.17                   }
+{ Version 1.30, update: 2006.05.18                   }
+{ Version 1.40, update: 2017.10.24 GitHub            }
+{ Version 1.41, update: 2022.07.24 Lazarus           }
+{ Version 1.42, update: 2024.04.08                   }
 {----------------------------------------------------}
 
 {CHANGELOG:
-# v1.0
+# v1.00
 - base stuff
-# v1.1
+# v1.10
 - added "" and escape function
-# v1.2
+# v1.20
 - fixed registry access rights (now readonly)
-# v1.3
+# v1.30
 - fixed registry readonly to old code for D3
+# v1.40 / v1.41
+- ?
+# v1.42
+- make compilable crossplatform (but will work only on Windows)
 }
+
+{$ifdef FPC}
+  {$MODE Delphi}
+{$endif}
 
 interface
 
-uses Windows, Classes, Graphics, Forms, Controls, StdCtrls, SysUtils,
-     dialogs,
-     Registry;
+uses
+     {$ifdef windows}
+     Windows, Registry,
+     {$endif}
+     Classes, Graphics, Forms, Controls, StdCtrls, SysUtils;
+     //dialogs
 
 type
   TWWWLabel = class(TCustomLabel)
@@ -119,16 +127,20 @@ end;
 function MyExec(s: string): boolean;
 var ret: boolean;
 begin
+  {$ifdef windows}
   if s <> '' then
   begin
-    if WinExec(PChar(s), SW_SHOWNORMAL)<32 then
-      ret:=false
+    if WinExec(PChar(s), SW_SHOWNORMAL) < 32 then
+      ret := false
     else
-      ret:=true;
+      ret := true;
   end
   else
-    ret:=false;
-  Result := ret;
+    ret := false;
+  result := ret;
+  {$else}
+  result := false;
+  {$endif}
 end; { MyExec }
 
 
@@ -161,25 +173,25 @@ begin
   try
     key.RootKey := HKEY_CLASSES_ROOT;
 
-{$IFNDEF VER100} { Borland Delphi 3.0 }
+    {$IFNDEF VER100} { Borland Delphi 3.0 }
     key.Access := KEY_READ;
-{$ENDIF}
+    {$ENDIF}
 
-{$IFNDEF VER100} { Borland Delphi 3.0 }
+    {$IFNDEF VER100} { Borland Delphi 3.0 }
     stat := key.OpenKeyReadOnly('\http\shell\open\command');
-{$ELSE}
+    {$ELSE}
     stat := key.OpenKey('\http\shell\open\command', false);
-{$ENDIF}
+    {$ENDIF}
 
     if not stat then
     begin
       key.CloseKey;
       key.RootKey := HKEY_LOCAL_MACHINE;
-{$IFNDEF VER100} { Borland Delphi 3.0 }
+      {$IFNDEF VER100} { Borland Delphi 3.0 }
       stat := key.OpenKeyReadOnly('\SOFTWARE\Classes\HTTP\shell\open\command');
-{$ELSE}
+      {$ELSE}
       stat := key.OpenKey('\SOFTWARE\Classes\HTTP\shell\open\command', false);
-{$ENDIF}
+      {$ENDIF}
     end;
 
     if stat and key.ValueExists('') then www := key.ReadString('');

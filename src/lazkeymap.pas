@@ -3,19 +3,27 @@ unit lazkeymap;
 // user app key mapping control (non visual) v1.0-laz
 // (c)2005, 2024 MoNsTeR/GDC, Jakub Noniewicz, monster@Noniewicz.com
 // update: 20050623 (D3)
-// update: 20240404 (Lazarus)
+// update: 20240404, 08 (Lazarus)
 
 {todo:
 - set from props 
 }
 
+{$ifdef FPC}
+  {$MODE Delphi}
+{$endif}
+
 interface
 
 uses
-  Windows, 
+  {$ifdef windows}
+  Windows,
+  {$endif}
+  {$ifdef FPC}
+  lclproc,
+  {$endif}
   Classes, Controls, Forms, Dialogs, ExtCtrls, 
-  IniFiles, ComCtrls, Buttons, StdCtrls, Menus,
-  lclproc;
+  IniFiles, ComCtrls, Buttons, StdCtrls, Menus;
 
 
 type TShortCutEdit = class(TComponent)
@@ -122,7 +130,7 @@ begin
   if assigned(FEditKey) then
   begin
     FEditKey.MaxLength := 4;
-    FEditKey.OnKeyDown := @EditKeyKeyDown;
+    FEditKey.OnKeyDown := EditKeyKeyDown; //no @?
   end;
   if assigned(FListViewKeys) then
   begin
@@ -141,7 +149,7 @@ begin
     c := FListViewKeys.Columns.Add;
     c.Caption := FCol2Cap;
     c.Width := 85;
-    FListViewKeys.OnChange := @ListViewKeysChange;
+    FListViewKeys.OnChange := ListViewKeysChange; //no @?
   end;
 
   GetShortcuts;

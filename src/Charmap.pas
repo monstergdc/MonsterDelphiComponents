@@ -1,22 +1,32 @@
 unit CharMap;
 
 {---------------------------------------------}
-{ TCharMap component                          }
+{ TCharMap Delphi/Lazarus component           }
 { (c)2002, 2003, 2024 Noniewicz.com           }
 { Jakub Noniewicz aka MoNsTeR/GDC             }
-{ Version 1.0, update: 2003.08.27             }
-{ Version 1.0-laz, update: 2024.04.07         }
+{---------------------------------------------}
+{ History:                                    }
+{ Version 1.00, update: 2003.08.27            }
+{ Version 1.01, update: 2024.04.07, 08        }
 {---------------------------------------------}
 
 {TODO:
-- WMSize -> crossplatform
+- ?
 }
+
+{$ifdef FPC}
+  {$MODE Delphi}
+{$endif}
 
 interface
 
 uses Classes, Controls,
-     //Messages,
+     {$ifdef FPC}
+     LMessages,
+     {$else}
+     Messages,
      Windows,
+     {$endif}
      Forms, Graphics, StdCtrls,
      Grids, SysUtils;
 
@@ -40,7 +50,11 @@ type
     procedure Click; override;
     procedure DrawCell(ACol, ARow: Longint; ARect: TRect; AState: TGridDrawState); override;
     function SelectCell(ACol, ARow: Longint): Boolean; override;
+    {$ifdef FPC}
+    procedure WMSize(var Message: TLMSize); message LM_SIZE;
+    {$else}
     procedure WMSize(var Message: TWMSize); message WM_SIZE;
+    {$endif}
   public
     constructor Create(AOwner: TComponent); override;
     property SelectedChar: Char read FSelectedChar;
@@ -151,7 +165,11 @@ begin
   invalidate;
 end;
 
+{$ifdef FPC}
+procedure TCharMap.WMSize(var Message: TLMSize);
+{$else}
 procedure TCharMap.WMSize(var Message: TWMSize);
+{$endif}
 var GridLines: Integer;
 begin
   GridLines := 6 * GridLineWidth;
@@ -160,3 +178,4 @@ begin
 end;
 
 end.
+
