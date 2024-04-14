@@ -9,7 +9,7 @@ interface
 
 uses
   gradimg, wwwlabel, loglib, lissajoux, recent, tarrow, clbitbtn, lazkeymap, 
-  Charmap, LazarusPackageIntf;
+  charmap, LazarusPackageIntf;
 
 implementation
 
@@ -23,7 +23,7 @@ begin
   RegisterUnit('tarrow', @tarrow.Register);
   RegisterUnit('clbitbtn', @clbitbtn.Register);
   RegisterUnit('lazkeymap', @lazkeymap.Register);
-  RegisterUnit('Charmap', @Charmap.Register);
+  RegisterUnit('charmap', @charmap.Register);
 end;
 
 initialization

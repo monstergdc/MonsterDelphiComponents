@@ -65,9 +65,9 @@
         <UnitName Value="lazkeymap"/>
       </Item9>
       <Item10>
-        <Filename Value="src\Charmap.pas"/>
+        <Filename Value="src\charmap.pas"/>
         <HasRegisterProc Value="True"/>
-        <UnitName Value="CharMap"/>
+        <UnitName Value="charMap"/>
       </Item10>
     </Files>
     <RequiredPkgs Count="1">

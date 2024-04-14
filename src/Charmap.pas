@@ -1,4 +1,4 @@
-unit CharMap;
+unit charMap;
 
 {---------------------------------------------}
 { TCharMap Delphi/Lazarus component           }
