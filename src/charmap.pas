@@ -7,7 +7,8 @@ unit charMap;
 {---------------------------------------------}
 { History:                                    }
 { Version 1.00, update: 2003.08.27            }
-{ Version 1.01, update: 2024.04.07, 08        }
+{ Version 1.01, update: 2024.04.07, 08,       }
+{ Version 1.02, update: 2024.04.18            }
 {---------------------------------------------}
 
 {TODO:
@@ -20,30 +21,36 @@ unit charMap;
 
 interface
 
-uses Classes, Controls,
+uses Classes, SysUtils, Controls,
      {$ifdef FPC}
+     LConvEncoding,
      LMessages,
      {$else}
      Messages,
      Windows,
      {$endif}
-     Forms, Graphics, StdCtrls,
-     Grids, SysUtils;
+     Forms, Graphics, StdCtrls, Grids;
 
-{255-32=223}
-{224/8 = 28}
 
-const CharRows = 8;
-      CharCols = 28;
+const
+  //255-32=223 -> 224
+  //CharCols = 28; //8*28 = 224
+  //CharRows = 8;
+
+  CharCols = 16;
+  CharRows = (256-32) div CharCols; //224/16 = 14
+
 
 type
   TCharMap = class(TCustomGrid)
   private
     FOnChange: TNotifyEvent;
-    FSelectedChar: char;
+    FUseHeader: boolean;
+    FSelectedChar: string;
     FSelectedCharCode: Byte;
-    MyCells: array[0..CharCols-1, 0..CharRows-1] of char;
-    function GetCellChar(ACol, ARow: Integer): char;
+    MyCells: array[0..CharCols-1, 0..CharRows-1] of ansichar;
+    function GetCellChar(ACol, ARow: Integer): ansichar;
+    function GetCellCharStr(ACol, ARow: Integer): string;
     procedure FillChars;
   protected
     procedure Change; dynamic;
@@ -55,11 +62,14 @@ type
     {$else}
     procedure WMSize(var Message: TWMSize); message WM_SIZE;
     {$endif}
+    procedure FWriteUseHeader(PUseHeader: boolean);
   public
     constructor Create(AOwner: TComponent); override;
-    property SelectedChar: Char read FSelectedChar;
-    property SelectedCharCode: Byte read FSelectedCharCode;
   published
+    property UseHeader: boolean read FUseHeader write FWriteUseHeader;
+    property SelectedChar: string read FSelectedChar;
+    property SelectedCharCode: byte read FSelectedCharCode;
+
     property Align;
     property BorderStyle;
     property Color;
@@ -94,7 +104,6 @@ procedure Register;
 implementation
 
 
-
 procedure Register;
 begin
   RegisterComponents('Monster', [TCharMap]);
@@ -113,16 +122,13 @@ begin
   inherited Create(AOwner);
 
   //defaults
-  FixedCols := 0;
-  FixedRows := 0;
-  ColCount := CharCols;
-  RowCount := CharRows;
+  FWriteUseHeader(true);
   ScrollBars := ssNone;
   Options := Options - [goRangeSelect] + [goDrawFocusSelected, goVertLine, goHorzLine];
 
-  FSelectedChar := ' ';
-  FSelectedCharCode := ord(FSelectedChar);
   FillChars;
+  FSelectedChar := ' ';
+  FSelectedCharCode := ord(FSelectedChar[1]);
   SelectCell(0, 0);
   Invalidate;
 end;
@@ -133,13 +139,13 @@ begin
 end;
 
 procedure TCharMap.Click;
-var TheCellChar: char;
+var TheCellChar: ansichar;
 begin
   inherited Click;
   TheCellChar := GetCellChar(Col, Row);
-  if TheCellChar <> '' then
+  if TheCellChar <> #0 then
   begin
-    FSelectedChar := TheCellChar;
+    FSelectedChar := GetCellCharStr(col, Row);
     FSelectedCharCode := ord(TheCellChar);
   end;
   Change;
@@ -147,21 +153,59 @@ end;
 
 procedure TCharMap.DrawCell(ACol, ARow: Longint; ARect: TRect; AState: TGridDrawState);
 var txt: string;
+    chset: integer;
 begin
   inherited; //2024 laz fix
-  txt := GetCellChar(ACol, ARow);
+
+  chset := self.Font.CharSet;
+
+  if FUseHeader and ((ACol = 0) or (ARow = 0)) then  //2024 head opt
+  begin
+    if (ACol = 0) and (ARow = 0) then exit;
+    if ACol = 0 then txt := inttohex((ARow-1)*16+32, 2);
+    if ARow = 0 then txt := inttohex(ACol-1, 2);
+  end
+  else
+  begin
+    txt := GetCellCharStr(ACol, ARow);
+  end;
+
+  if FUseHeader and ((ACol = 0) or (ARow = 0)) then
+  begin
+    self.Font.CharSet := 0;
+  end;
+
   with ARect, Canvas do
+  begin
     TextRect(ARect, Left + (Right - Left - TextWidth(txt)) div 2, Top + (Bottom - Top - TextHeight(txt)) div 2, txt)
+  end;
+
+  self.Font.CharSet := chset;
 end;
 
-function TCharMap.GetCellChar(ACol, ARow: Integer): char;
+function TCharMap.GetCellChar(ACol, ARow: Integer): ansiChar;
 begin
-  Result := MyCells[ACol, ARow];
+  //todo: chk range
+  if FUseHeader then
+    result := MyCells[ACol-1, ARow-1]
+  else
+    result := MyCells[ACol, ARow];
+end;
+
+function TCharMap.GetCellCharStr(ACol, ARow: Integer): string;
+var Encoded: boolean;
+begin
+  //2024 laz utf8 issue fix
+  {$ifdef FPC}
+  result := ConvertEncodingToUTF8(GetCellChar(ACol, ARow), GetDefaultTextEncoding, Encoded);
+  {$else}
+  result := GetCellChar(ACol, ARow);
+  {$endif}
 end;
 
 function TCharMap.SelectCell(ACol, ARow: Longint): Boolean;
 begin
-  Result := inherited SelectCell(ACol, ARow);
+  result := inherited SelectCell(ACol, ARow);
   invalidate;
 end;
 
@@ -170,11 +214,42 @@ procedure TCharMap.WMSize(var Message: TLMSize);
 {$else}
 procedure TCharMap.WMSize(var Message: TWMSize);
 {$endif}
+
+  function b2i: integer;
+  begin
+    if FUseHeader then result := 1 else result := 0;
+  end;
+
 var GridLines: Integer;
 begin
   GridLines := 6 * GridLineWidth;
-  DefaultColWidth := (Message.Width - GridLines) div CharCols;
-  DefaultRowHeight := (Message.Height - GridLines) div CharRows;
+  DefaultColWidth := (Message.Width - GridLines) div (CharCols + b2i);
+  DefaultRowHeight := (Message.Height - GridLines) div (CharRows + b2i);
+end;
+
+procedure TCharMap.FWriteUseHeader(PUseHeader: boolean);
+begin
+  if FUseHeader <> PUseHeader then
+  begin
+    FUseHeader := PUseHeader;
+
+    if FUseHeader then
+    begin
+      FixedCols := 1;
+      FixedRows := 1;
+      ColCount := CharCols+1;
+      RowCount := CharRows+1;
+    end
+    else
+    begin
+      FixedCols := 0;
+      FixedRows := 0;
+      ColCount := CharCols;
+      RowCount := CharRows;
+    end;
+
+    invalidate;
+  end;
 end;
 
 end.
