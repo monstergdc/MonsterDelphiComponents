@@ -18,7 +18,8 @@
         </Debugging>
       </Linking>
     </CompilerOptions>
-    <Version Major="1"/>
+    <License Value="BSD 2-Clause License"/>
+    <Version Major="1" Build="1"/>
     <Files Count="10">
       <Item1>
         <Filename Value="src\gradimg.pas"/>
